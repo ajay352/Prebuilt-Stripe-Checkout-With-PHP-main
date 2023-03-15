@@ -1,5 +1,5 @@
 <?php
-require_once('vendor/autoload.php');
+/*require_once('vendor/autoload.php');
 require_once('/stripe-php-master/init.php');
 header('Content-Type: application/json');
 
@@ -38,6 +38,46 @@ $session = $stripe->checkout->sessions->create([
     ]
 ]);
 
-echo json_encode($session);
+echo json_encode($session);*/
 
+
+/*if(isset($_POST['productname']) && $_POST['productname']!="" && isset($_POST['amount']) && $_POST['amount']!="")
+{*/
+require 'vendor/autoload.php';
+\Stripe\Stripe::setApiKey('sk_test_51Mh4ZnSCgSjDH3xCg6DirB6vEkUxvxUTRayH3Ah13hIYQTNdU0IrNoEjHfj0CnjbFBE7shoozrMIge9PAGscMfN500mPvIZG9r');
+
+header('Content-Type: application/json');
+
+$YOUR_DOMAIN = 'http://localhost/Prebuilt-Stripe-Checkout-With-PHP-main/';
+
+$checkout_session = \Stripe\Checkout\Session::create([
+  'payment_method_types' => ['card'],
+  'line_items' => [[
+    'price_data' => [
+      'currency' => 'USD',
+      'unit_amount' => 2000,
+      'product_data' => [
+        'name' => 'shirt',
+        
+      ],
+    ],
+    'quantity' => 1,
+  ]],
+  'mode' => 'payment',
+  'success_url' => $YOUR_DOMAIN . 'success.html',
+  'cancel_url' => $YOUR_DOMAIN . 'cancel.html',
+]);
+
+echo json_encode(['id' => $checkout_session->id]);
+
+
+
+
+
+
+/*}else{
+header("location:http://www.example.com");
+}*/
 ?>
+
+

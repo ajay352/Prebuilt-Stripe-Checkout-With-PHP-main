@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,64 @@
     <h1>Stripe Checkout</h1>
     <button id="btn">Checkout</button>
     <script src="http://js.stripe.com/v3/"></script>
-    <script src="script.js"></script>
+    <script src="./js/script.js"></script>
+    <script></script>
+    
 </body>
-</html>
+</html>-->
+
+
+<html>
+<head>
+    
+</head>
+<!--<?php if(isset($_POST['productname']) && $_POST['productname']!="" && isset($_POST['amount']) && $_POST['amount']!="")
+{ ?>
+    <form name="paymentform" class="paymentform" style="display:none" id="paymentform" method="post" action="pay.php">
+        <input name="productname" type="hidden" value="<?=$_POST['productname'];?>">
+        <input name="amount" type="hidden" value="<?=$_POST['amount'];?>">
+    </form>-->
+<body>
+    
+
+    <button id="paymentform">checkout</button>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript">
+    // Create an instance of the Stripe object with your publishable API key
+    var stripe = Stripe("pk_test_51Mh4ZnSCgSjDH3xCOtIIlwcYrVcnphh3uFwEmpHRXULVrDnebg4fdnCa2lMHd619l2hcy3qXZkzcjbQxwPPkPrA1003XXTLs8q");
+    var paymentform = document.querySelector("#paymentform");
+
+    //let formData = new FormData();
+    //formData.append('productname', paymentform.elements["productname"]);
+    //formData.append('amount', paymentform.elements["amount"]);
+    paymentform.addEventListener('click',()=>{
+    fetch("checkout.php", {
+        method: "POST",
+        headers:{
+            'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify({})
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (session) {
+        return stripe.redirectToCheckout({ sessionId: session.id });
+    })
+    .then(function (result) {
+        // If redirectToCheckout fails due to a browser or network
+        // error, you should display the localized error message to your
+        // customer using error.message.
+        if (result.error) {
+        alert(result.error.message);
+        }
+    })
+    .catch(function (error) {
+        console.error("Error:", error);
+    });
+})
+
+</script>
+</body>
