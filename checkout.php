@@ -44,7 +44,7 @@ echo json_encode($session);*/
 /*if(isset($_POST['productname']) && $_POST['productname']!="" && isset($_POST['amount']) && $_POST['amount']!="")
 {*/
 require 'vendor/autoload.php';
-\Stripe\Stripe::setApiKey('sk_test_51Mh4ZnSCgSjDH3xCg6DirB6vEkUxvxUTRayH3Ah13hIYQTNdU0IrNoEjHfj0CnjbFBE7shoozrMIge9PAGscMfN500mPvIZG9r');
+\Stripe\Stripe::setApiKey('sk_test_51MlpZ9SB9vfXbJlo341JoAieql6yR3jcNn4OoX6EopHKth7hL7w70e4ZVzjXirRRD3KPXylEttioV0uA1fFNrnlD00PiYLvhIE');
 
 header('Content-Type: application/json');
 
@@ -54,7 +54,7 @@ $checkout_session = \Stripe\Checkout\Session::create([
   'payment_method_types' => ['card'],
   'line_items' => [[
     'price_data' => [
-      'currency' => 'USD',
+      'currency' => 'INR',
       'unit_amount' => 2000,
       'product_data' => [
         'name' => 'shirt',
